@@ -76,6 +76,7 @@ KMT_TESTFUNC Test_SoftGpuSlabHandoff;
 KMT_TESTFUNC Test_SoftGpuVsyncPolicy;
 #endif
 KMT_TESTFUNC Test_Example;
+KMT_TESTFUNC Test_ExAuxKlibFirmwareTable;
 KMT_TESTFUNC Test_ExCallback;
 KMT_TESTFUNC Test_ExDoubleList;
 KMT_TESTFUNC Test_ExFastMutex;
@@ -564,6 +565,7 @@ const KMT_TEST TestList[] =
     { "SoftGpuSlabHandoff",                Test_SoftGpuSlabHandoff },
     { "SoftGpuVsyncPolicy",                Test_SoftGpuVsyncPolicy },
 #endif
+    { "ExAuxKlibFirmwareTable",             Test_ExAuxKlibFirmwareTable },
     { "ExCallback",                         Test_ExCallback },
     { "ExDoubleList",                       Test_ExDoubleList },
     { "ExFastMutex",                        Test_ExFastMutex },
