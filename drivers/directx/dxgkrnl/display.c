@@ -402,6 +402,7 @@ DxgkpBindWin32kSession(
         {
             Previous = Session->Process;
             Session->Process = Process;
+            NewSession->Process = NULL;
         }
         else
         {
@@ -416,7 +417,8 @@ DxgkpBindWin32kSession(
 
     if (NewSession != NULL)
     {
-        ObDereferenceObject(NewSession->Process);
+        if (NewSession->Process != NULL)
+            ObDereferenceObject(NewSession->Process);
         ExFreePoolWithTag(NewSession, TAG_DXGK_DISPLAY);
     }
     if (Previous != NULL)
