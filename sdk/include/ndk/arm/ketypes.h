@@ -1008,6 +1008,7 @@ typedef struct _KPRCB
     //REQUEST_MAILBOX RequestMailbox[1];
 
     // FIXME: Oldstyle stuff
+    KSPIN_LOCK_QUEUE TimerTableLockQueue[LOCK_QUEUE_TIMER_TABLE_LOCKS];
 
 } KPRCB, *PKPRCB;
 C_ASSERT(FIELD_OFFSET(KPRCB, ProcessorState) == 0x20);
