@@ -473,7 +473,7 @@ WinLdrLoadDeviceDriver(PLIST_ENTRY LoadOrderListHead,
                        PCSTR BootPath,
                        PUNICODE_STRING FilePath,
                        ULONG Flags,
-                       PLDR_DATA_TABLE_ENTRY *DriverDTE)
+                       PKLDR_DATA_TABLE_ENTRY *DriverDTE)
 {
     CHAR FullPath[1024];
     CHAR DriverPath[1024];
@@ -702,7 +702,7 @@ LoadModule(
     _In_ PCSTR File,
     _In_ PCSTR ImportName, // BaseDllName
     _In_ TYPE_OF_MEMORY MemoryType,
-    _Out_ PLDR_DATA_TABLE_ENTRY* Dte,
+    _Out_ PKLDR_DATA_TABLE_ENTRY* Dte,
     _In_ ULONG Percentage)
 {
     BOOLEAN Success;
@@ -959,13 +959,13 @@ LoadWindowsCore(IN USHORT OperatingSystemVersion,
                 IN OUT PLOADER_PARAMETER_BLOCK LoaderBlock,
                 IN PCSTR BootOptions,
                 IN PCSTR BootPath,
-                IN OUT PLDR_DATA_TABLE_ENTRY* KernelDTE)
+                IN OUT PKLDR_DATA_TABLE_ENTRY* KernelDTE)
 {
     BOOLEAN Success;
     PCSTR Option;
     ULONG OptionLength;
     PVOID KernelBase, HalBase, KdDllBase = NULL, BootVidBase = NULL;
-    PLDR_DATA_TABLE_ENTRY HalDTE, KdDllDTE = NULL, BootVidDTE = NULL;
+    PKLDR_DATA_TABLE_ENTRY HalDTE, KdDllDTE = NULL, BootVidDTE = NULL;
     PCSTR ModuleName;
     CHAR DirPath[MAX_PATH];
     CHAR HalFileName[MAX_PATH];
@@ -1235,7 +1235,7 @@ LoadWindowsCore(IN USHORT OperatingSystemVersion,
 
         if (KdDllBase && _stricmp(KdDllName, "kdnet.dll") == 0)
         {
-            PLDR_DATA_TABLE_ENTRY ExtensionDTE;
+            PKLDR_DATA_TABLE_ENTRY ExtensionDTE;
             CHAR ExtensionPath[MAX_PATH];
             ULONG ExtensionId;
             ULONG i;
@@ -1739,7 +1739,7 @@ LoadAndBootWindowsCommon(
 {
     PLOADER_PARAMETER_BLOCK LoaderBlockVA;
     BOOLEAN Success;
-    PLDR_DATA_TABLE_ENTRY KernelDTE;
+    PKLDR_DATA_TABLE_ENTRY KernelDTE;
     KERNEL_ENTRY_POINT KiSystemStartup;
     PFN_NUMBER FinalLoaderPagesSpanned;
 

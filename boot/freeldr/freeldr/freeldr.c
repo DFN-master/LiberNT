@@ -35,7 +35,7 @@ BOOLEAN
 LoadRosload(
     _In_ PCSTR RosloadPath,
     _Out_ PVOID* ImageBase,
-    _Out_ PLDR_DATA_TABLE_ENTRY* DataTableEntry)
+    _Out_ PKLDR_DATA_TABLE_ENTRY* DataTableEntry)
 {
     CHAR FullPath[MAX_PATH];
     BOOLEAN Success;
@@ -68,7 +68,7 @@ static
 ULONG
 LaunchSecondStageLoader(VOID)
 {
-    PLDR_DATA_TABLE_ENTRY RosloadDTE;
+    PKLDR_DATA_TABLE_ENTRY RosloadDTE;
     PVOID ImageBase;
     LONG (*EntryPoint)(VOID);
 

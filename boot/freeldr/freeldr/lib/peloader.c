@@ -131,7 +131,7 @@ PeLdrpLoadAndScanReferencedDll(
     IN PCCH DirectoryPath,
     IN PCH ImportName,
     IN PLIST_ENTRY Parent OPTIONAL,
-    OUT PLDR_DATA_TABLE_ENTRY *DataTableEntry);
+    OUT PKLDR_DATA_TABLE_ENTRY *DataTableEntry);
 
 static BOOLEAN
 PeLdrpBindImportName(
@@ -289,7 +289,7 @@ PeLdrpBindImportName(
     if (((ULONG_PTR)ForwarderName > (ULONG_PTR)ExportDirectory) &&
         ((ULONG_PTR)ForwarderName < ((ULONG_PTR)ExportDirectory + ExportSize)))
     {
-        PLDR_DATA_TABLE_ENTRY DataTableEntry;
+        PKLDR_DATA_TABLE_ENTRY DataTableEntry;
         PIMAGE_EXPORT_DIRECTORY RefExportDirectory;
         ULONG RefExportSize;
         CHAR ForwardDllName[256];
@@ -388,7 +388,7 @@ PeLdrpLoadAndScanReferencedDll(
     IN PCCH DirectoryPath,
     IN PCH ImportName,
     IN PLIST_ENTRY Parent OPTIONAL,
-    OUT PLDR_DATA_TABLE_ENTRY *DataTableEntry)
+    OUT PKLDR_DATA_TABLE_ENTRY *DataTableEntry)
 {
     CHAR FullDllName[256];
     BOOLEAN Success;
@@ -521,7 +521,7 @@ PeLdrpScanImportAddressTable(
 BOOLEAN
 PeLdrInitializeModuleList(VOID)
 {
-    PLDR_DATA_TABLE_ENTRY FreeldrDTE;
+    PKLDR_DATA_TABLE_ENTRY FreeldrDTE;
 
     InitializeListHead(&FrLdrModuleList);
 
@@ -541,7 +541,7 @@ PeLdrInitializeModuleList(VOID)
 }
 
 PVOID
-PeLdrInitSecurityCookie(PLDR_DATA_TABLE_ENTRY LdrEntry)
+PeLdrInitSecurityCookie(PKLDR_DATA_TABLE_ENTRY LdrEntry)
 {
     PULONG_PTR Cookie;
     ULONG_PTR NewCookie;
@@ -581,10 +581,10 @@ BOOLEAN
 PeLdrCheckForLoadedDll(
     _Inout_ PLIST_ENTRY ModuleListHead,
     _In_ PCSTR DllName,
-    _Out_ PLDR_DATA_TABLE_ENTRY* LoadedEntry)
+    _Out_ PKLDR_DATA_TABLE_ENTRY* LoadedEntry)
 {
     PLIST_ENTRY ModuleEntry;
-    PLDR_DATA_TABLE_ENTRY DataTableEntry;
+    PKLDR_DATA_TABLE_ENTRY DataTableEntry;
 
     TRACE("PeLdrCheckForLoadedDll: DllName %s\n", DllName);
 
@@ -596,7 +596,7 @@ PeLdrCheckForLoadedDll(
     {
         /* Get a pointer to the current DTE */
         DataTableEntry = CONTAINING_RECORD(ModuleEntry,
-                                           LDR_DATA_TABLE_ENTRY,
+                                           KLDR_DATA_TABLE_ENTRY,
                                            InLoadOrderLinks);
 
         TRACE("PeLdrCheckForLoadedDll: DTE %p, EP %p, Base %p, Name '%.*S'\n",
@@ -624,9 +624,9 @@ BOOLEAN
 PeLdrScanImportDescriptorTable(
     IN OUT PLIST_ENTRY ModuleListHead,
     IN PCCH DirectoryPath,
-    IN PLDR_DATA_TABLE_ENTRY ScanDTE)
+    IN PKLDR_DATA_TABLE_ENTRY ScanDTE)
 {
-    PLDR_DATA_TABLE_ENTRY DataTableEntry;
+    PKLDR_DATA_TABLE_ENTRY DataTableEntry;
     PIMAGE_IMPORT_DESCRIPTOR ImportTable;
     ULONG ImportTableSize;
     PCH ImportName;
@@ -708,11 +708,11 @@ PeLdrAllocateDataTableEntry(
     IN PCCH BaseDllName,
     IN PCCH FullDllName,
     IN PVOID BaseVA,
-    OUT PLDR_DATA_TABLE_ENTRY *NewEntry)
+    OUT PKLDR_DATA_TABLE_ENTRY *NewEntry)
 {
     PVOID BasePA = VaToPa(BaseVA);
     PWSTR BaseDllNameBuffer, Buffer;
-    PLDR_DATA_TABLE_ENTRY DataTableEntry;
+    PKLDR_DATA_TABLE_ENTRY DataTableEntry;
     PIMAGE_NT_HEADERS NtHeaders;
     USHORT Length;
 
@@ -720,7 +720,7 @@ PeLdrAllocateDataTableEntry(
           BaseDllName, FullDllName, BasePA);
 
     /* Allocate memory for a data table entry, zero-initialize it */
-    DataTableEntry = (PLDR_DATA_TABLE_ENTRY)FrLdrHeapAlloc(sizeof(LDR_DATA_TABLE_ENTRY),
+    DataTableEntry = (PKLDR_DATA_TABLE_ENTRY)FrLdrHeapAlloc(sizeof(KLDR_DATA_TABLE_ENTRY),
                                                            TAG_WLDR_DTE);
     if (DataTableEntry == NULL)
         return FALSE;
@@ -729,7 +729,7 @@ PeLdrAllocateDataTableEntry(
     NtHeaders = RtlImageNtHeader(BasePA);
 
     /* Initialize corresponding fields of DTE based on NT headers value */
-    RtlZeroMemory(DataTableEntry, sizeof(LDR_DATA_TABLE_ENTRY));
+    RtlZeroMemory(DataTableEntry, sizeof(KLDR_DATA_TABLE_ENTRY));
     DataTableEntry->DllBase = BaseVA;
     DataTableEntry->SizeOfImage = NtHeaders->OptionalHeader.SizeOfImage;
     DataTableEntry->EntryPoint = RVA(BaseVA, NtHeaders->OptionalHeader.AddressOfEntryPoint);
@@ -822,7 +822,7 @@ PeLdrAllocateDataTableEntry(
 VOID
 PeLdrFreeDataTableEntry(
     // _In_ PLIST_ENTRY ModuleListHead,
-    _In_ PLDR_DATA_TABLE_ENTRY Entry)
+    _In_ PKLDR_DATA_TABLE_ENTRY Entry)
 {
     // ASSERT(ModuleListHead);
     ASSERT(Entry);
@@ -1048,7 +1048,7 @@ PeLdrLoadBootImage(
     _In_ PCSTR FilePath,
     _In_ PCSTR BaseDllName,
     _Out_ PVOID* ImageBase,
-    _Out_ PLDR_DATA_TABLE_ENTRY* DataTableEntry)
+    _Out_ PKLDR_DATA_TABLE_ENTRY* DataTableEntry)
 {
     BOOLEAN Success;
 

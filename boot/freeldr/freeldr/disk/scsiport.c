@@ -1655,7 +1655,7 @@ extern char __ImageBase;
 ULONG
 LoadBootDeviceDriver(VOID)
 {
-    PLDR_DATA_TABLE_ENTRY BootDdDTE;
+    PKLDR_DATA_TABLE_ENTRY BootDdDTE;
     CHAR NtBootDdPath[MAX_PATH];
     PVOID ImageBase = NULL;
     ULONG (NTAPI *EntryPoint)(IN PVOID DriverObject, IN PVOID RegistryPath);

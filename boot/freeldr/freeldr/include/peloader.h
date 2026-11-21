@@ -48,32 +48,32 @@ PeLdrAllocateDataTableEntry(
     IN PCCH BaseDllName,
     IN PCCH FullDllName,
     IN PVOID BaseVA,
-    OUT PLDR_DATA_TABLE_ENTRY *NewEntry);
+    OUT PKLDR_DATA_TABLE_ENTRY *NewEntry);
 
 VOID
 PeLdrFreeDataTableEntry(
     // _In_ PLIST_ENTRY ModuleListHead,
-    _In_ PLDR_DATA_TABLE_ENTRY Entry);
+    _In_ PKLDR_DATA_TABLE_ENTRY Entry);
 
 BOOLEAN
 PeLdrScanImportDescriptorTable(
     IN OUT PLIST_ENTRY ModuleListHead,
     IN PCCH DirectoryPath,
-    IN PLDR_DATA_TABLE_ENTRY ScanDTE);
+    IN PKLDR_DATA_TABLE_ENTRY ScanDTE);
 
 BOOLEAN
 PeLdrCheckForLoadedDll(
     _Inout_ PLIST_ENTRY ModuleListHead,
     _In_ PCSTR DllName,
-    _Out_ PLDR_DATA_TABLE_ENTRY* LoadedEntry);
+    _Out_ PKLDR_DATA_TABLE_ENTRY* LoadedEntry);
 
 PVOID
 PeLdrInitSecurityCookie(
-    _In_ PLDR_DATA_TABLE_ENTRY LdrEntry);
+    _In_ PKLDR_DATA_TABLE_ENTRY LdrEntry);
 
 BOOLEAN
 PeLdrLoadBootImage(
     _In_ PCSTR FilePath,
     _In_ PCSTR BaseDllName,
     _Out_ PVOID* ImageBase,
-    _Out_ PLDR_DATA_TABLE_ENTRY* DataTableEntry);
+    _Out_ PKLDR_DATA_TABLE_ENTRY* DataTableEntry);
