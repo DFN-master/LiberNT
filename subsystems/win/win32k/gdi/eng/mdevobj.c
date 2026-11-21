@@ -149,7 +149,6 @@ MDEVOBJ_Create(
             }
 
             TRACE("Adding '%S' to MDEV %p\n", pGraphicsDevice->szWinDeviceName, pmdev);
-            PDEVOBJ_vReference(ppdev);
             pmdev->dev[pmdev->cDev].ppdev = ppdev;
             pmdev->cDev++;
         }

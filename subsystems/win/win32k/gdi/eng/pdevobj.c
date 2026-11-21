@@ -36,6 +36,19 @@ InitPDEVImpl(VOID)
     return STATUS_SUCCESS;
 }
 
+VOID
+NTAPI
+FreePDEVImpl(VOID)
+{
+    ASSERT(gppdevList == NULL);
+    ASSERT(gppdevDetached == NULL);
+    if (ghsemPDEV)
+    {
+        EngDeleteSemaphore(ghsemPDEV);
+        ghsemPDEV = NULL;
+    }
+}
+
 #if DBG
 PPDEVOBJ
 NTAPI
@@ -686,6 +699,7 @@ PDEVOBJ_Create(
         EngUnloadImage(pldev);
         return NULL;
     }
+    SURFACE_ShareUnlockSurface(pSurface);
 
     /* Enable DirectDraw */
     if (!PDEVOBJ_bEnableDirectDraw(ppdev))
@@ -804,7 +818,6 @@ PDEVOBJ_bSwitchMode(
     PDEVMODEW pdm)
 {
     PPDEVOBJ ppdevTmp;
-    PSURFACE pSurface;
     BOOL retval = FALSE;
 
     /* Lock the PDEV */
@@ -832,15 +845,6 @@ PDEVOBJ_bSwitchMode(
     if (!ppdevTmp)
     {
         DPRINT1("Failed to create a new PDEV\n");
-        goto leave2;
-    }
-
-    /* 3. Create a new surface */
-    pSurface = PDEVOBJ_pSurface(ppdevTmp);
-    if (!pSurface)
-    {
-        DPRINT1("PDEVOBJ_pSurface failed\n");
-        PDEVOBJ_vRelease(ppdevTmp);
         goto leave2;
     }
 
@@ -948,7 +952,7 @@ PDEVOBJ_bMoveToDisplay(
         StateFlags = pGraphicsDevice->StateFlags;
         ppdevNew = PDEVOBJ_Create(pGraphicsDevice, pdm, 0, LDEV_DEVICE_DISPLAY);
         pGraphicsDevice->StateFlags = StateFlags;
-        if (ppdevNew && PDEVOBJ_pSurface(ppdevNew) && PDEVOBJ_bExchangeDisplay(ppdev, ppdevNew))
+        if (ppdevNew && PDEVOBJ_bExchangeDisplay(ppdev, ppdevNew))
         {
             gppdevDetached = ppdevNew;
             bRet = TRUE;
