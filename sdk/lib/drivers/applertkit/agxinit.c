@@ -14,9 +14,9 @@
 #ifndef UNIT_TEST
 #include <ntddk.h>
 #endif
-#include <reactos/drivers/appleadt.h>
-#include <reactos/drivers/appleuat.h>
-#include <reactos/drivers/appleagxinit.h>
+#include <libernt/drivers/appleadt.h>
+#include <libernt/drivers/appleuat.h>
+#include <libernt/drivers/appleagxinit.h>
 
 #define AGX_CHANNEL_STATE_BASE      0xfffffc2040003fd0ULL
 #define AGX_CHANNEL_RING_BASE       0xfffffc2000002800ULL

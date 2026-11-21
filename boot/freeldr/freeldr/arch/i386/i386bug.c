@@ -1,7 +1,7 @@
 
 #include <freeldr.h>
 
-#include <reactos/buildno.h>
+#include <libernt/buildno.h>
 #include <debug.h>
 
 typedef struct _FRAME

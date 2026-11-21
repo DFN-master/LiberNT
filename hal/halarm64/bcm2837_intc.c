@@ -41,9 +41,9 @@
 #include <ndk/kefuncs.h>
 #include <ioaccess.h>
 #include <halfuncs.h>
-#include <reactos/drivers/acpi/acpi.h>
+#include <libernt/drivers/acpi/acpi.h>
 #include <halacpi.h>
-#include <reactos/arm64/sysreg.h>
+#include <libernt/arm64/sysreg.h>
 #include "halext.h"
 #include "bcm2837.h"
 

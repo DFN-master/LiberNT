@@ -6488,7 +6488,7 @@ WINUSERAPI void WINAPI UnregisterUserApiHook(void);
 #endif /* __WINESRC__ */
 
 #ifdef _WINE
-#include "reactos/undocuser.h"
+#include "libernt/undocuser.h"
 #endif
 
 #ifdef _MSC_VER

@@ -17,7 +17,7 @@
  */
 
 #include <freeldr.h>
-#include <reactos/drivers/bootvid/framebuf.h>
+#include <libernt/drivers/bootvid/framebuf.h>
 #include <cportlib/cportlib.h>
 
 #include "../ntldr/ntldropts.h"

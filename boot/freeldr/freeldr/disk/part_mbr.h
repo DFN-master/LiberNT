@@ -46,7 +46,7 @@ C_ASSERT(sizeof(MASTER_BOOT_RECORD) == 512);
 /*
  * Partition type defines (of PSDK)
  */
-#include <reactos/rosioctl.h>
+#include <libernt/rosioctl.h>
 #define PARTITION_ENTRY_UNUSED          0x00      // Entry unused
 #define PARTITION_FAT_12                0x01      // 12-bit FAT entries
 #define PARTITION_XENIX_1               0x02      // Xenix

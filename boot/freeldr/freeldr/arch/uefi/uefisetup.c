@@ -9,7 +9,7 @@
 
 #include <debug.h>
 #if defined(_M_ARM64)
-#include <reactos/arm64/early_uart.h>
+#include <libernt/arm64/early_uart.h>
 #endif
 DBG_DEFAULT_CHANNEL(WARNING);
 #if DBG

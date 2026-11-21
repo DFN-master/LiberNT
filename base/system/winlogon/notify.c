@@ -9,7 +9,7 @@
 /* INCLUDES ******************************************************************/
 
 #include "winlogon.h"
-#include <reactos/wtssession.h>
+#include <libernt/wtssession.h>
 
 /* GLOBALS *******************************************************************/
 

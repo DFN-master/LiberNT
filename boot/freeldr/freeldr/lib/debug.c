@@ -22,7 +22,7 @@
 
 #if defined(UEFIBOOT) && (defined(_M_ARM64) || defined(_M_RISCV64))
 #if defined(_M_ARM64)
-#include <reactos/arm64/early_uart.h>
+#include <libernt/arm64/early_uart.h>
 #endif
 BOOLEAN UefiSerialInitialize(VOID);
 VOID UefiSerialPutChar(_In_ UCHAR Character);

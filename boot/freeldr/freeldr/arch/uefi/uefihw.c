@@ -12,7 +12,7 @@
 #if defined(_M_IX86) || defined(_M_AMD64)
 #include <arch/pc/pcbios.h>
 #endif
-#include <reactos/arc/loaderblk.h>
+#include <libernt/arc/loaderblk.h>
 #include <Fdt.h>
 #include <libernt/fdtlib.h>
 

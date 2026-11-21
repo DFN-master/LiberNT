@@ -53,7 +53,7 @@ extern "C++"
 #define IID_PPV_ARGS(ppType) __uuidof(**(ppType)), IID_PPV_ARGS_Helper(ppType)
 #endif
 #else
-// See include/reactos/shellutils.h
+// See include/libernt/shellutils.h
 #ifdef __cplusplus
 #   define IID_PPV_ARG(Itype, ppType) IID_##Itype, reinterpret_cast<void**>((static_cast<Itype**>(ppType)))
 #   define IID_NULL_PPV_ARG(Itype, ppType) IID_##Itype, NULL, reinterpret_cast<void**>((static_cast<Itype**>(ppType)))
