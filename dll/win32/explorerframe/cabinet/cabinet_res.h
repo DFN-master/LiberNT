@@ -57,5 +57,6 @@
 #define IDS_CAB_MORE                12060
 #define IDS_CAB_NEW_TAB             12061
 #define IDS_CAB_SHOW_PREVIEW        12046
+#define IDS_CAB_SHOW_QUICK_ACCESS   12047
 #define IDS_CAB_PREVIEW_NONE        12062
 #define IDS_CAB_PREVIEW_SELECT      12063

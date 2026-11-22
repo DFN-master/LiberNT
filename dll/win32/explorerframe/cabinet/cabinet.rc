@@ -49,6 +49,7 @@ BEGIN
     IDS_CAB_SHOW_CHECKBOXES "Item check boxes"
     IDS_CAB_SHOW_EXTENSIONS "File name extensions"
     IDS_CAB_SHOW_HIDDEN "Hidden items"
+    IDS_CAB_SHOW_QUICK_ACCESS "Show Quick access"
     IDS_CAB_CUT "Cut"
     IDS_CAB_COPY "Copy"
     IDS_CAB_PASTE "Paste"
