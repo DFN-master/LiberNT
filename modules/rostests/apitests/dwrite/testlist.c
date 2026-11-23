@@ -2,6 +2,7 @@
 #include <apitest.h>
 
 extern void func_BidiLevels(void);
+extern void func_DWriteCore(void);
 extern void func_FontFallbackLocale(void);
 extern void func_FontFallbackSource(void);
 extern void func_GlyphJustification(void);
@@ -14,6 +15,7 @@ extern void func_TrailingWhitespace(void);
 const struct test winetest_testlist[] =
 {
     { "BidiLevels", func_BidiLevels },
+    { "DWriteCore", func_DWriteCore },
     { "FontFallbackLocale", func_FontFallbackLocale },
     { "FontFallbackSource", func_FontFallbackSource },
     { "GlyphJustification", func_GlyphJustification },
