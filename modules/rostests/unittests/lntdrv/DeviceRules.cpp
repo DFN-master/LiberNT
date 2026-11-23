@@ -138,6 +138,31 @@ static void CheckInfClass(const char *klass, const char *guid, bool function)
     DeleteFileW(path);
 }
 
+static void CheckInstallAllSelection()
+{
+    DeviceInfo generic = Device(L"PCI\\VEN_1002&DEV_15D8&SUBSYS_01231002&REV_C2\\5&975E6B9D&0&00",
+                                { L"PCI\\VEN_1002&DEV_15D8&SUBSYS_01231002&REV_C2" },
+                                { L"PCI\\VEN_1002&DEV_15D8&REV_C2", L"PCI\\CC_0300" });
+    std::vector<std::vector<DeviceInfo>> groups;
+
+    generic.Inf = L"basicdisplay.inf";
+    generic.Service = L"BasicDisplay";
+    generic.MatchingId = L"PCI\\CC_0300";
+    ok(GenericDriver(generic), "the test device is not on a generic driver\n");
+
+    groups = MissingInstallAllGroups({ generic });
+    ok(groups.empty(), "a working device on a generic driver is selected for /installall\n");
+
+    groups = MissingGroups({ generic }, true, true);
+    ok(groups.size() == 1 && groups[0].size() == 1,
+       "the interactive generic selection dropped the device\n");
+
+    generic.Problem = CM_PROB_FAILED_INSTALL;
+    groups = MissingInstallAllGroups({ generic });
+    ok(groups.size() == 1 && groups[0].size() == 1,
+       "a device that needs a driver is not selected for /installall\n");
+}
+
 START_TEST(DeviceRules)
 {
     CheckInfClass("System", "{4d36e97d-e325-11ce-bfc1-08002be10318}", true);
@@ -204,4 +229,5 @@ START_TEST(DeviceRules)
     CheckVersion(L"1.65535.0.0", L"2.0.0.0", DriverOrder::Newer);
     CheckCatalogSource();
     CheckCatalogTarget();
+    CheckInstallAllSelection();
 }
